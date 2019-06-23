@@ -1,16 +1,11 @@
-# progress_pal
+# ProgressPal
 
-A simple, elegant way to track your journey to breaking bad habits
+[ProgressPal Image](/progress-pal.png)
 
-## Getting Started
+## What is it?
 
-This project is a starting point for a Flutter application.
+A simple, elegant way to track your journey to breaking bad habits on ios. Created with Flutter.
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+A clean, efficient UI that highlights the most important information (your progress). If you decide you want to track another habit, or you release that you entered the wrong day for quitting the habit, you can do so in the settings menu.
