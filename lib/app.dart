@@ -96,119 +96,144 @@ class NewHabit extends StatefulWidget {
 }
 
 class _NewHabitState extends State<NewHabit> {
+  DateTime _relapseDate;
+  String _habitName;
+  FocusNode _textFieldFocus = new FocusNode();
+  final _habitNameController = TextEditingController();
+  
+  @override void dispose() {
+    // TODO: implement dispose
+    
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      resizeToAvoidBottomInset: false,
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'Choose Habit',
           style: Styles.counterTextString.copyWith(fontSize: 25),
         ),
       ),
-      child: Container(
-        decoration: Styles.backgroundGradient,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Card(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30))),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            'Choose a Habit and a Start Date',
-                            style: TextStyle(
-                              color: Colors.grey.shade800,
-                              fontFamily: 'SourceSans',
-                              fontSize: 17,
-                            ),
-                          ),
-                          Divider(
-                            color: Colors.grey[300],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  'Name',
-                                  style: TextStyle(fontFamily: 'SourceSans'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                            child: CupertinoTextField(
-                              autocorrect: true,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[50],
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(6),
-                                ),
+      child: GestureDetector(
+        onTap: (){
+          _textFieldFocus.unfocus();
+        },
+        child: Container(
+          decoration: Styles.backgroundGradient,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Card(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              'Choose a Habit and a Start Date',
+                              style: TextStyle(
+                                color: Colors.grey.shade800,
+                                fontFamily: 'SourceSans',
+                                fontSize: 17,
                               ),
-                              keyboardAppearance: Brightness.dark,
-                              placeholder: 'Drinking alcohol',
-                              textAlign: TextAlign.left,
-                              textCapitalization: TextCapitalization.words,
-                              style: TextStyle(fontFamily: 'SourceSans'),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  'Last relapse date',
-                                  style: TextStyle(fontFamily: 'SourceSans'),
-                                ),
-                              ],
+                            Divider(
+                              color: Colors.grey[300],
                             ),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  width: 300,
-                                  height: 100,
-                                  child: CupertinoDatePicker(
-                                    onDateTimeChanged: (_) {
-                                      print('Date time changed');
-                                    },
-                                    initialDateTime: DateTime.now(),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Name',
+                                    style: TextStyle(fontFamily: 'SourceSans'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                              child: CupertinoTextField(
+                                controller: _habitNameController,
+                                focusNode: _textFieldFocus,
+                                autocorrect: true,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[50],
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(6),
                                   ),
                                 ),
+                                keyboardAppearance: Brightness.dark,
+                                placeholder: 'Drinking alcohol',
+                                textAlign: TextAlign.left,
+                                textCapitalization: TextCapitalization.words,
+                                style: TextStyle(
+                                  fontFamily: 'SourceSans',
+                                  color: Colors.black87
+                                ),
                               ),
-                            ],
-                          ),
-                          CupertinoButton(
-                            onPressed: () {
-                              print('Pressed');
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Last relapse date',
+                                    style: TextStyle(fontFamily: 'SourceSans'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
                               children: <Widget>[
-                                Icon(CupertinoIcons.add_circled),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                                  child: Text('Confirm'),
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                    width: 300,
+                                    height: 100,
+                                    child: CupertinoDatePicker(
+                                      onDateTimeChanged: (date) {
+                                        _relapseDate = date;
+                                        print(_relapseDate);
+                                      },
+                                      initialDateTime: DateTime.now(),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                        ],
+                            CupertinoButton(
+                              onPressed: () {
+                                _habitName = _habitNameController.text;
+                                print("$_relapseDate $_habitName");
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(CupertinoIcons.add_circled),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    child: Text('Confirm'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
