@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:keyboard_actions/keyboard_actions.dart';
 import 'styles.dart';
 
 class ProgressApp extends StatelessWidget {
@@ -97,31 +96,6 @@ class NewHabit extends StatefulWidget {
 }
 
 class _NewHabitState extends State<NewHabit> {
-  final FocusNode _nameField = FocusNode();
-
-  KeyboardActionsConfig _buildConfig(BuildContext context) {
-    return KeyboardActionsConfig(
-      keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
-      keyboardBarColor: Colors.grey[200],
-      nextFocus: true,
-      actions: [
-        KeyboardAction(
-          closeWidget: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(Icons.close),
-          ),
-        )
-      ],
-    );
-  }
-
-  @override
-  void initState() {
-    // Configure keyboard actions
-    FormKeyboardActions.setKeyboardActions(context, _buildConfig(context));
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -173,22 +147,63 @@ class _NewHabitState extends State<NewHabit> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                             child: CupertinoTextField(
-                              keyboardType: TextInputType.text,
-                              focusNode: _nameField,
                               autocorrect: true,
-                              placeholder: 'Drinking alcohol',
-                              decoration: (BoxDecoration(
+                              decoration: BoxDecoration(
                                 color: Colors.grey[50],
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(6),
                                 ),
-                              )),
+                              ),
                               keyboardAppearance: Brightness.dark,
+                              placeholder: 'Drinking alcohol',
                               textAlign: TextAlign.left,
                               textCapitalization: TextCapitalization.words,
                               style: TextStyle(fontFamily: 'SourceSans'),
                             ),
-                          )
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Last relapse date',
+                                  style: TextStyle(fontFamily: 'SourceSans'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  width: 300,
+                                  height: 100,
+                                  child: CupertinoDatePicker(
+                                    onDateTimeChanged: (_) {
+                                      print('Date time changed');
+                                    },
+                                    initialDateTime: DateTime.now(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          CupertinoButton(
+                            onPressed: () {
+                              print('Pressed');
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(CupertinoIcons.add_circled),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                  child: Text('Confirm'),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
