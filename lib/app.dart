@@ -24,13 +24,11 @@ class _HomePageState extends State<HomePage> {
     return CupertinoPageScaffold(
       child: Container(
         decoration: BoxDecoration(
-          gradient: RadialGradient(
+          gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 15, 32, 39),
-              Color.fromARGB(255, 32, 58, 67),
-              Color.fromARGB(255, 44, 83, 100),
+              Color.fromARGB(255, 20, 30, 48),
+              Color.fromARGB(255, 36, 59, 85),
             ],
-            radius: 1.2
           ),
         ),
         child: SafeArea(
@@ -40,10 +38,18 @@ class _HomePageState extends State<HomePage> {
                 right: 0,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    CupertinoIcons.ellipsis,
-                    color: CupertinoColors.extraLightBackgroundGray,
-                    size: 45,
+                  child: CupertinoButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(builder: (context) => newHabit()),
+                      );
+                    },
+                    child: Icon(
+                      CupertinoIcons.ellipsis,
+                      color: CupertinoColors.extraLightBackgroundGray,
+                      size: 45,
+                    ),
                   ),
                 ),
               ),
@@ -76,6 +82,22 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class newHabit extends StatefulWidget {
+  @override
+  _newHabitState createState() => _newHabitState();
+}
+
+class _newHabitState extends State<newHabit> {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      child: Center(
+        child: Text('New habit'),
       ),
     );
   }
