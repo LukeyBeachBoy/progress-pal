@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Variables
-  String _habitName = 'No habit :(';
+  String _habitName = 'No habit tracked';
   String _counterNumber = '0';
   String _counterDateWord = 'days ago';
 
@@ -31,22 +31,29 @@ class _HomePageState extends State<HomePage> {
   Future<void> setHabit() async {
     // Grab stored habit and display it
     final _prefs = await SharedPreferences.getInstance(); // Get stored access
-
-    DateTime lastRelapse = DateTime.parse(_prefs.getString('lastRelapse'));
+    DateTime lastRelapse = new DateTime(900);
+    String name = '';
+    try {
+    lastRelapse = DateTime.parse(_prefs.getString('lastRelapse'));
+    name = _prefs.getString('habitName');
     Moment nowMoment = new Moment.fromDate(DateTime.now());
     List<String> moments = nowMoment.from(lastRelapse).split(' ');
     String number = moments[0];
     String momentSubstring =
-        moments.sublist(1).toString().replaceAll(new RegExp(r"[\[,\]\,]"), '');
+    moments.sublist(1).toString().replaceAll(new RegExp(r"[\[,\]\,]"), '');
     // Remove brackets and commas from string, also make 'a' = '1'
     setState(() {
-      _habitName = _prefs.getString('habitName');
+      _habitName = name;
       if (!(momentSubstring.contains('few'))) {
         number = number.replaceAll(new RegExp(r"a"), '1');
       }
       _counterNumber = number; //
       _counterDateWord = momentSubstring; // Get rest of the string
     });
+    } catch (e) {
+
+    }
+
     print(_habitName);
   }
 
@@ -136,6 +143,7 @@ class _HomePageState extends State<HomePage> {
                         top: MediaQuery.of(context).size.height / 1.85),
                     child: CupertinoButton(
                       onPressed: () {
+                      if(_habitName == 'No habit :(')
                         showCupertinoDialog(
                             context: context,
                             builder: (BuildContext context) {
