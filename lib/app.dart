@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'styles.dart';
 
 class ProgressApp extends StatelessWidget {
@@ -23,14 +24,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 20, 30, 48),
-              Color.fromARGB(255, 36, 59, 85),
-            ],
-          ),
-        ),
+        decoration: Styles.backgroundGradient,
         child: SafeArea(
           child: Stack(
             children: <Widget>[
@@ -42,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        CupertinoPageRoute(builder: (context) => newHabit()),
+                        CupertinoPageRoute(builder: (context) => NewHabit()),
                       );
                     },
                     child: Icon(
@@ -52,6 +46,18 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'My Habit',
+                      style: Styles.counterTextString,
+                    ),
+                  ),
+                ],
               ),
               Center(
                 child: Column(
@@ -87,17 +93,68 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class newHabit extends StatefulWidget {
+class NewHabit extends StatefulWidget {
   @override
-  _newHabitState createState() => _newHabitState();
+  _NewHabitState createState() => _NewHabitState();
 }
 
-class _newHabitState extends State<newHabit> {
+class _NewHabitState extends State<NewHabit> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      child: Center(
-        child: Text('New habit'),
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(
+          'Choose Habit',
+          style: Styles.counterTextString.copyWith(fontSize: 25),
+        ),
+      ),
+      child: Container(
+        decoration: Styles.backgroundGradient,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Card(
+            color: Colors.grey[800],
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            'Choose a new habit you want to break'.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'SourceSans',
+                              fontWeight: FontWeight.w800,
+                              fontSize: 17,
+                              wordSpacing: 2,
+                            ),
+                          ),
+                          Divider(color: Colors.grey[700],),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+                            child: CupertinoTextField(
+                              autocorrect: true,
+                              keyboardAppearance: Brightness.dark,
+                              textAlign: TextAlign.center,
+                              textCapitalization: TextCapitalization.words,
+                              style: TextStyle(),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
