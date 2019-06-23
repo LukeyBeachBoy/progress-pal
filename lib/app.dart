@@ -30,20 +30,17 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Positioned(
                 right: 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CupertinoButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(builder: (context) => NewHabit()),
-                      );
-                    },
-                    child: Icon(
-                      CupertinoIcons.ellipsis,
-                      color: CupertinoColors.extraLightBackgroundGray,
-                      size: 45,
-                    ),
+                child: CupertinoButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(builder: (context) => NewHabit()),
+                    );
+                  },
+                  child: Icon(
+                    CupertinoIcons.ellipsis,
+                    color: CupertinoColors.extraLightBackgroundGray,
+                    size: 45,
                   ),
                 ),
               ),
@@ -114,7 +111,7 @@ class _NewHabitState extends State<NewHabit> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Card(
-            color: Colors.grey[800],
+              color: Colors.white,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30))),
               child: Column(
@@ -126,24 +123,34 @@ class _NewHabitState extends State<NewHabit> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            'Choose a new habit you want to break'.toUpperCase(),
+                            'Choose a Habit and a Start Date',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.grey.shade800,
                               fontFamily: 'SourceSans',
-                              fontWeight: FontWeight.w800,
                               fontSize: 17,
-                              wordSpacing: 2,
                             ),
                           ),
-                          Divider(color: Colors.grey[700],),
+                          Divider(
+                            color: Colors.grey[300],
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(right: 300),
+                            child: Text(
+                              'Name',
+                              style: TextStyle(
+                                fontFamily: 'SourceSans'
+                              ),
+                            ),
+                          ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+                            padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                             child: CupertinoTextField(
                               autocorrect: true,
                               keyboardAppearance: Brightness.dark,
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.left,
                               textCapitalization: TextCapitalization.words,
-                              style: TextStyle(),
+                              style: TextStyle(
+                                  backgroundColor: CupertinoColors.white),
                             ),
                           )
                         ],
