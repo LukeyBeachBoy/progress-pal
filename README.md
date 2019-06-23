@@ -1,6 +1,6 @@
 # ProgressPal
 
-[ProgressPal Image](/progress-pal.png)
+![ProgressPal Image](/progress-pal.png)
 
 ## What is it?
 
