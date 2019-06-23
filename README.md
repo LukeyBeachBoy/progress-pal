@@ -1,6 +1,9 @@
 # ProgressPal
 
-![ProgressPal Image](/progress-pal.PNG)
+Home Screen            |  Habit picker screen
+:---------------------:|:-------------------------:
+![](/progress-pal.PNG) |  ![](/choose-habit.PNG)
+
 
 ## What is it?
 
